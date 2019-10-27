@@ -145,7 +145,7 @@ class AddVendor extends Component {
         }
         if (Name === "" ) {
             this.setState({
-                Name: 'required'
+                Name: 'Required'
             });
         } 
         else if(!/^[a-zA-Z]*$/g.test(Name)){
@@ -168,7 +168,7 @@ class AddVendor extends Component {
         }
         if (address === "") {
             this.setState({
-                Limit: 'required'
+                Limit: 'Required'
             });
         } else {
             if (address.length >= 1) {
@@ -178,13 +178,13 @@ class AddVendor extends Component {
                 });
             } else {
                 this.setState({
-                   Limit: "Limit would be a $0"
+                   Limit: "Limit would be at least $0"
                 });
             }
         }
         if (phone_number === "") {
             this.setState({
-                Balance: 'required'
+                Balance: 'Required'
             });
         } else {
             if (phone_number.length >= 1) {
@@ -214,7 +214,7 @@ class AddVendor extends Component {
             }
         }
         else{
-            console.log('azi hamrea se ')
+            console.log('null ')
         }
        }
        
