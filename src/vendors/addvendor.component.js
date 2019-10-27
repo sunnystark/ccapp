@@ -94,41 +94,12 @@ class AddVendor extends Component {
         let phoneNoIsValid = false;
 
             
-        // if(Name === '' ){
-        //  console.log('tesrt')
-        //  this.setState({Name:"Required"})
-        // }
-        // else { 
-        //     if(mobile === '' )
-        //     {
-        //     console.log('mobile');
-        //     this.setState({Cn:"Required"})
-        //    }else if( mobile.length <= 10 && mobile.length > 1)
-        //     {
-        //         console.log('number');
-        //         this.setState({Cn:'length would be 10 character'})
-        //     }else{
-        //         this.setState({Cn:''})
-        //     }
-        // }
-        // if (phone_number === ''){
-        //     this.setState({Balance:"Required"})
-        // }
-        // else if (address === ''){
-        //     this.setState({Limit:"Required"})
-        // }
+
         if (mobile === ""  || !mobile) {
             this.setState({
                 Cn: 'Required'
             });
         } else {
-            // if (!/^[0-9]+$/.test(mobile)) {
-            //     CnIsValid = true;
-            //     this.setState({
-            //         Cn: null
-            //     });
-//             if(!/^(0|[1-9][0-9]{9})$/i.test(mobile)){
-//  console.log('galt no hai ')
 
         if( isNaN(mobile) && /\D/.test(mobile)){ 
             console.log('hello')
