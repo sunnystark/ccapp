@@ -94,7 +94,7 @@ class AddVendor extends Component {
         let phoneNoIsValid = false;
 
             
-
+ 
         if (mobile === ""  || !mobile) {
             this.setState({
                 Cn: 'Required'
@@ -171,7 +171,10 @@ class AddVendor extends Component {
         }
 
        if(CnIsValid && addressIsValid && phoneNoIsValid && nameIsValid === true) {
-    
+              console.log('null ')
+       }
+        else{
+            
             let payload={
                 Name: this.props.vendor.name,
                 mobile: this.props.vendor.mobile,
@@ -184,19 +187,11 @@ class AddVendor extends Component {
                 dispatch(vendorAction.createVendor(payload));
             }
         }
-        else{
-            console.log('null ')
-        }
+        
        }
        
 
-        
-       
-         
-    
-
-
-   render() {
+render() {
      const { classes } = this.props;
      const { match : {params } } = this.props;
      console.log(this.props.vendor);
