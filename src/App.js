@@ -16,10 +16,10 @@ class App extends Component {
         <Router history={history}>
           <div>            
               <Switch>
-                <Route exact path='/home' component={Home} />
-                <Route exact path='/vendor' component={Vendor} />
-                <Route exact path='/add-vendor' component={AddVendor} />
-                <Route exact path='/edit-vendor/:id' component={AddVendor} />
+                <PrivateRoute exact path='/home' component={Home} />
+                <PrivateRoute exact path='/vendor' component={Vendor} />
+                <PrivateRoute exact path='/add-vendor' component={AddVendor} />
+                <PrivateRoute exact path='/edit-vendor/:id' component={AddVendor} />
                 <Route exact path='/' component={Login} />
               </Switch>
           </div>
