@@ -57,14 +57,16 @@ const styles = theme => ({
 
 class AddVendor extends Component {
 
-    state = {
+   state = {
         Limit:'',
-        Name:'',
+        Uname:'',
         Cn:'',
-        Balance:''
+        Balance:'',
+        CnIsValid:false,
+        nameIsValid :false,
+        addressIsValid :false,
+        phoneNoIsValid :false,
     }
-
-   
   
     handleChange = prop => event => {
         const { dispatch } = this.props;
@@ -88,122 +90,120 @@ class AddVendor extends Component {
         const mobile = this.props.vendor.mobile;
         const phone_number = this.props.vendor.phone_number;
         const address = this.props.vendor.address;
-        let CnIsValid = false;
-        let nameIsValid = false;
-        let addressIsValid = false;
-        let phoneNoIsValid = false;
-
+        const { CnIsValid, nameIsValid, addressIsValid, phoneNoIsValid } = this.state;
             
  
-        if (mobile === ""  || !mobile) {
+        if (mobile === "" ) {
             this.setState({
                 Cn: 'Required'
             });
-        } else {
-
-        if( isNaN(mobile) && /\D/.test(mobile)){ 
-            console.log('hello')
-            CnIsValid = true;
-            this.setState({
+        } else if( isNaN(mobile) && /\D/.test(mobile)) {
+          console.log('hello')
+           this.setState({
                 Cn: "card number input must be numeric "
             });
         }
             else {
                 this.setState({
-                    Cn: null
+                    Cn: null,
+                    CnIsValid: true,
                 });
             }
-        }
         if (Name === "" ) {
             this.setState({
-                Name: 'Required'
+                Uname: 'Required'
             });
         } 
         else if(!/^[a-zA-Z]*$/g.test(Name)){
             this.setState({
-                Name: 'Input should be String '
+                Uname: 'Input should be String '
             });
 
         }
-        else {
-            if (Name.length >= 3) {
-                nameIsValid = true 
+        else if(Name.length >= 3 ) {
+                 
                 this.setState({
-                   Name: null
+                   Uname: null,
+                   nameIsValid:true
+
                 });
             } else {
                 this.setState({
-                   Name: "Sorry, this is not a valid name"
+                   Uname: "Sorry, this is not a valid name"
                 });
             }
-        }
+        
         if (address === "") {
             this.setState({
                 Limit: 'Required'
             });
-        } else {
-            if (address.length >= 1) {
-                addressIsValid = true
-                this.setState({
-                   Limit: null
+        } else if (address.length >= 1) {
+            this.setState({
+                   Limit: null,
+                   addressIsValid:true
                 });
             } else {
                 this.setState({
                    Limit: "Limit would be at least $0"
                 });
             }
-        }
+        
         if (phone_number === "") {
             this.setState({
                 Balance: 'Required'
             });
-        } else {
-            if (phone_number.length >= 1) {
-                phoneNoIsValid = true
+        } 
+        else if(isNaN(phone_number) && /\D/.test(phone_number)){
+            this.setState({
+                Balance: "Balance input must be numeric "
+            });
+        }
+        
+        else if (phone_number.length >= 1) {
+            
                 this.setState({
-                   Balance: null
+                   Balance: null,
+                   phoneNoIsValid: true
                 });
             } else {
                 this.setState({
-                   Balance: "Limit would be a $0"
+                   Balance: "balance would be a $1"
                 });
             }
-        }
 
-       if(CnIsValid && addressIsValid && phoneNoIsValid && nameIsValid === true) {
-              console.log('null ')
-       }
-        else{
-            
-            let payload={
-                Name: this.props.vendor.name,
-                mobile: this.props.vendor.mobile,
-                phone_number: this.props.vendor.phone_number,
-                address: this.props.vendor.address,
-            }
-            if(params.id){
-                dispatch(vendorAction.editVendorInfo(params.id, payload));
-            }else{
-                dispatch(vendorAction.createVendor(payload));
-            }
-        }
-        
-       }
-       
 
-render() {
+if(CnIsValid && addressIsValid && phoneNoIsValid && nameIsValid == true) {
+    let payload={
+        name: this.props.vendor.name,
+        mobile: this.props.vendor.mobile,
+        phone_number: this.props.vendor.phone_number,
+        address: this.props.vendor.address,
+    }
+    
+    if(params.id){
+        dispatch(vendorAction.editVendorInfo(params.id, payload));
+    }else{
+        dispatch(vendorAction.createVendor(payload));
+    }  
+}          
+else{
+    console.log('Object');
+}
+}
+
+
+   render() {
      const { classes } = this.props;
      const { match : {params } } = this.props;
      console.log(this.props.vendor);
-    
      
 
      function InsertText(props) {
-        return <Typography>{'Add New Vendor Card'}</Typography>;
+        return <Typography>{'Add New Vendor'}</Typography>;
       }
       
       function EditText(props) {
-          return <Typography>{'Edit Vendor Card'}</Typography>;
+          return <Typography>{'Edit Vendor'}</Typography>;
       }
 
 
@@ -240,14 +240,14 @@ render() {
                                 <form className={classes.container}>
                                     <Grid container spacing={24}>
                                         <Grid item xs={3}>
-                                            <TextField
+                                        <TextField
                                                 id="name"
                                                 label="Name"
                                                 className={classes.textField}
                                                 value={this.props.vendor.name}
                                                 onChange={this.handleChange('name')}
                                                 margin="normal"
-                                                helperText={this.state.Name}
+                                                helperText={this.state.Uname}
                                             />
                                         </Grid>
                                         <Grid item xs={3}>
